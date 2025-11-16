@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Doll ♡ Posts</title>
+
+    <!-- Pixelify Sans Font -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Font Awesome for search icon -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+
+    <style>
+      :root {
+        --pink-bg: #ffe6f0;
+        --box-pink: #ffe6f0;
+        --text: #f975aa;
+        --white: #fff;
+
+        --polka-bg-image: radial-gradient(
+            rgb(255, 246, 248) 28.4%,
+            transparent 28.4%
+          ),
+          radial-gradient(rgb(255, 246, 248) 28.4%, transparent 28.4%);
+        --polka-bg-position: 0px 0px, 32px 32px;
+        --polka-bg-size: 64px 64px;
+        --polka-bg-color: #ffe6f0ff;
+      }
+
+      body {
+        background-color: var(--polka-bg-color);
+        background-image: var(--polka-bg-image);
+        background-position: var(--polka-bg-position);
+        background-size: var(--polka-bg-size);
+        color: var(--text);
+        font-family: "Pixelify Sans", cursive;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 25px 10px;
+        text-align: center;
+        scroll-behavior: smooth;
+        text-shadow: 0.5px 0 0 var(--text);
+      }
+
+      /* --- Universal pink containers --- */
+      .navbar,
+      .links,
+      .box,
+      .search-bar {
+        background: var(--box-pink);
+        border-radius: 40px;
+        border: 10px solid var(--white);
+        box-shadow: 0 2px 8px rgba(255, 171, 205);
+        padding: 10px 20px;
+        margin: 10px 0;
+        width: 90%;
+        max-width: 520px;
+        box-sizing: border-box;
+        position: relative;
+      }
+
+      /* Navbar links */
+      .navbar a,
+      .links a {
+        color: var(--text);
+        text-decoration: none;
+        font-weight: 700;
+        margin: 0 5px;
+        text-shadow: 0.6px 0 0 var(--text);
+      }
+
+      .navbar a:hover,
+      .links a:hover {
+        text-decoration: underline;
+      }
+
+      /* Bow for main container */
+      .box .corner-bow {
+        position: absolute;
+        top: -20px;
+        left: -20px;
+        width: 70px;
+        height: 70px;
+        pointer-events: none;
+        transform: rotate(-10deg);
+        z-index: 10;
+      }
+
+      /* Bold text */
+      b,
+      strong {
+        font-weight: 800;
+        text-shadow: 0.5px 0 0 var(--text), -0.5px 0 0 var(--text);
+      }
+
+      /* Remove Strawpage branding if injected */
+      footer a[href*="straw.page"] {
+        display: none !important;
+      }
+
+      /* --- Popup Styles --- */
+      #age-verification-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: var(--polka-bg-color);
+        background-image: var(--polka-bg-image);
+        background-position: var(--polka-bg-position);
+        background-size: var(--polka-bg-size);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+      }
+
+      #age-verification-box {
+        background: var(--box-pink);
+        border-radius: 40px;
+        border: 10px solid var(--white);
+        box-shadow: 0 2px 10px rgba(255, 171, 205);
+        padding: 30px;
+        width: 90%;
+        max-width: 400px;
+        box-sizing: border-box;
+        text-align: center;
+        position: relative;
+        color: var(--text);
+      }
+
+      #age-verification-box h2 {
+        font-size: 2.2rem;
+        margin-top: 0;
+        margin-bottom: 10px;
+        text-shadow: 1px 0 0 var(--text), -1px 0 0 var(--text);
+      }
+
+      #age-verification-box p {
+        font-size: 1.1rem;
+        margin-bottom: 20px;
+      }
+
+      #age-verification-box input[type="date"] {
+        padding: 10px;
+        border-radius: 18px;
+        border: 3px solid var(--text);
+        background-color: var(--white);
+        color: var(--text);
+        font-family: "Pixelify Sans", cursive;
+        font-size: 1.1rem;
+        margin-bottom: 15px;
+        width: calc(100% - 20px);
+        max-width: 250px;
+        box-sizing: border-box;
+        text-align: center;
+      }
+
+      #age-verification-box button {
+        background-color: var(--text);
+        color: var(--white);
+        border: none;
+        border-radius: 18px;
+        padding: 10px 20px;
+        font-family: "Pixelify Sans", cursive;
+        font-size: 1.2rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: background-color 0.2s;
+        text-shadow: 0.5px 0 0 var(--white);
+      }
+
+      #age-verification-box button:hover {
+        background-color: #e56394;
+      }
+
+      #age-verification-box .corner-bow {
+        position: absolute;
+        top: -20px;
+        left: -20px;
+        width: 70px;
+        height: 70px;
+        pointer-events: none;
+        transform: rotate(-10deg);
+        z-index: 10;
+      }
+
+      #error-message {
+        color: #e56394;
+        font-weight: 700;
+        margin-top: 10px;
+        min-height: 20px;
+      }
+
+      /* Desktop text scaling */
+      @media (min-width: 800px) {
+        body {
+          font-size: 1.2rem;
+        }
+
+        .navbar a,
+        .links a {
+          font-size: 1.1rem;
+        }
+
+        .box {
+          font-size: 1.1rem;
+        }
+
+        .box .corner-bow {
+          width: 100px;
+          height: 100px;
+          top: -30px;
+          left: -30px;
+        }
+
+        #age-verification-box .corner-bow {
+          width: 100px;
+          height: 100px;
+          top: -30px;
+          left: -30px;
+        }
+
+        #age-verification-box h2 {
+          font-size: 3rem;
+        }
+      }
+      /* Search bar style */
+      .search-bar {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        background: var(--box-pink);
+        border-radius: 40px;
+        border: 10px solid var(--white);
+        box-shadow: 0 2px 8px rgba(255, 171, 205);
+        padding: 10px 20px;
+        margin: 10px 0;
+        width: 90%;
+        max-width: 520px;
+        box-sizing: border-box;
+      }
+
+      .search-bar input[type="text"] {
+        width: 100%;
+        border: none;
+        outline: none;
+        background: transparent;
+        color: var(--text);
+        font-family: "Pixelify Sans", cursive;
+        font-size: 1.1rem;
+        text-align: center;
+        text-shadow: 0.5px 0 0 var(--text);
+      }
+
+      .search-bar input::placeholder {
+        color: var(--text);
+        opacity: 0.7;
+      }
+
+      /* Search icon */
+      .search-bar i {
+        position: absolute;
+        right: 15px;
+        color: var(--text);
+        font-size: 1.1rem;
+        pointer-events: none;
+      }
+      /* Make post images scale down on small screens */
+      .box img {
+        max-width: 100%;
+        height: auto;
+      }
+
+      /* Make the embed shrink on smaller screens */
+      .boardhost-wrapper iframe {
+        max-width: 100%;
+        width: 100%;
+        height: 250px; /* keep your existing height */
+      }
+      /* Link styling inside posts */
+      .box a {
+        color: #ff6cae; /* replace with your preferred color */
+        text-shadow: 0.5px 0 0 #ff6cae;
+        text-decoration: underline;
+        font-weight: 700;
+      }
+
+      .box a:hover {
+        text-decoration: underline;
+        color: #ff408c; /* optional hover color */
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Age Verification Popup -->
+    <div id="age-verification-overlay">
+      <div id="age-verification-box">
+        <img
+          class="corner-bow"
+          src="https://cdn.imgchest.com/files/34000b252df3.png"
+          alt="Bow sticker"
+        />
+        <h2>🔞 Adult Content Warning 🔞</h2>
+        <p>
+          This site contains **18+ content**. Please verify your birth date to
+          continue.
+        </p>
+        <input
+          type="date"
+          id="birthdate-input"
+          required
+          aria-label="Enter your birth date"
+        />
+        <button id="enter-button">♡ Enter Site ♡</button>
+        <div id="error-message"></div>
+      </div>
+    </div>
+
+    <!-- Logo -->
+    <header>
+      <img
+        src="https://cdn.imgchest.com/files/c5d667abcc3b.png"
+        alt="Doll logo"
+        style="width: 200px; height: auto; margin-bottom: 10px"
+      />
+    </header>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+      <a href="index.html">Home</a>⋆✿ <a href="posts.html">Posts</a>⋆✿
+      <a href="comics.html">Comics</a>⋆✿
+      <a href="galleries.html">Galleries</a>
+    </nav>
+    <!-- 💖 page links  -->
+    <div class="box">
+      <p style="font-size: 15px"><b>1</b> - 2 - 3 - 4</p>
+      <p style="font-size: 15px">
+        (2, 3, 4 etc. will be for future post pages)
+      </p>
+    </div>
+    <!-- 💖 Search Bar -->
+    <div class="search-bar">
+      <input type="text" placeholder="search posts ♡" />
+      <i class="fa-solid fa-magnifying-glass"></i>
+    </div>
+
+    <!-- Main posts containers -->
+
+    <!-- post 1 -->
+    <div class="box">
+      <img
+        class="corner-bow"
+        src="https://cdn.imgchest.com/files/34000b252df3.png"
+        alt="Bow sticker"
+      />
+      <h2>Post #1</h2>
+      <p>
+        My very first post on my site! if your seeing this, your one of my
+        golden fans lol
+      </p>
+
+      <img
+        src="https://i.pinimg.com/474x/27/0c/3f/270c3fa8fae6fdcaa0ad75dc9182373a.jpg"
+        alt="Description of your image"
+        style="
+          display: block;
+          margin: 10px auto;
+          border-radius: 20px;
+          width: 400px;
+        "
+      />
+      <p>
+        <span style="color: #ffabcd"
+          >tags : #undertale #frisk #cute #doodle</span
+        >
+      </p>
+
+      <div
+        style="
+          border: 5px solid #ffabcd;
+          border-radius: 25px;
+          padding: 5px 10px;
+          text-align: center;
+          display: inline-block;
+        "
+      >
+        <p>
+          If you want to comment, remember to type in "post #[the posts number]"
+          before your comment, this is so I know which post your commenting on!
+          applies to replies as well
+        </p>
+        <div
+          style="
+            font-size: 13px;
+            border: 5px solid #ffabcd;
+            border-radius: 25px;
+            background: #ffffff;
+            width: 90%;
+            max-width: 400px;
+            padding: 5px 10px;
+            text-align: center;
+            display: inline-block;
+          "
+        >
+          <h2>
+            <a href="https://mb.boardhost.com/sweetiedollxoxo/"
+              >♡┊[comment box] .ᐟ</a
+            >
+          </h2>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Function to set a cookie
+      function setCookie(name, value, days) {
+        let expires = "";
+        if (days) {
+          let date = new Date();
+          date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
+          expires = "; expires=" + date.toUTCString();
+        }
+        document.cookie =
+          name + "=" + (value || "") + expires + "; path=/; samesite=Lax";
+      }
+
+      // Function to get a cookie
+      function getCookie(name) {
+        let nameEQ = name + "=";
+        let ca = document.cookie.split(";");
+        for (let i = 0; i < ca.length; i++) {
+          let c = ca[i].trim();
+          if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length);
+        }
+        return null;
+      }
+
+      // Age Verification Logic
+      document.addEventListener("DOMContentLoaded", () => {
+        const overlay = document.getElementById("age-verification-overlay");
+        const input = document.getElementById("birthdate-input");
+        const button = document.getElementById("enter-button");
+        const error = document.getElementById("error-message");
+        const requiredAge = 18;
+
+        if (getCookie("age_verified") === "true") {
+          overlay.style.display = "none";
+          return;
+        }
+
+        button.addEventListener("click", () => {
+          const birthDateString = input.value;
+          if (!birthDateString) {
+            error.textContent = "❗ Please enter your birth date.";
+            return;
+          }
+
+          const birthDate = new Date(birthDateString);
+          const today = new Date();
+          let age = today.getFullYear() - birthDate.getFullYear();
+          const m = today.getMonth() - birthDate.getMonth();
+          if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate()))
+            age--;
+
+          if (age >= requiredAge) {
+            setCookie("age_verified", "true", 365);
+            overlay.style.display = "none";
+          } else {
+            error.textContent =
+              "🚫 Sorry, you must be 18 or older to enter this site.";
+          }
+        });
+      });
+    </script>
+
+    <!-- Lightbox container and script -->
+    <div
+      id="lightbox"
+      style="
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(255, 182, 193, 0.5);
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+      "
+    >
+      <div style="position: relative">
+        <img
+          id="lightbox-img"
+          src=""
+          alt="Lightbox"
+          style="
+            max-width: 90vw;
+            max-height: 90vh;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(255, 171, 205, 0.7);
+          "
+        />
+        <span
+          id="lightbox-close"
+          style="
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            font-size: 30px;
+            color: #ffabcd;
+            cursor: pointer;
+            font-weight: bold;
+            background: white;
+            border-radius: 50%;
+            width: 35px;
+            height: 35px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 0 10px rgba(255, 171, 205, 0.7);
+          "
+          >×</span
+        >
+      </div>
+    </div>
+
+    <script>
+      const lightbox = document.getElementById("lightbox");
+      const lightboxImg = document.getElementById("lightbox-img");
+      const closeBtn = document.getElementById("lightbox-close");
+
+      // Target all images inside posts
+      const allPostImages = document.querySelectorAll(".box img");
+
+      allPostImages.forEach((img) => {
+        img.style.cursor = "pointer";
+        img.addEventListener("click", () => {
+          lightbox.style.display = "flex";
+          lightboxImg.src = img.src;
+        });
+      });
+
+      closeBtn.addEventListener("click", () => {
+        lightbox.style.display = "none";
+      });
+
+      lightbox.addEventListener("click", (e) => {
+        if (e.target === lightbox) {
+          lightbox.style.display = "none";
+        }
+      });
+      // Get elements
+      const searchInput = document.querySelector(".search-bar input");
+      const searchIcon = document.querySelector(".search-bar i");
+      const posts = document.querySelectorAll(".box");
+
+      // Function to filter posts
+      function filterPosts() {
+        const query = searchInput.value.toLowerCase().trim();
+        posts.forEach((post) => {
+          const text = post.textContent.toLowerCase();
+          if (text.includes(query) || query === "") {
+            post.style.display = "block";
+          } else {
+            post.style.display = "none";
+          }
+        });
+      }
+
+      // Trigger search on Enter key
+      searchInput.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") filterPosts();
+      });
+
+      // Trigger search on magnifying glass click
+      searchIcon.addEventListener("click", filterPosts);
+    </script>
+  </body>
+</html>

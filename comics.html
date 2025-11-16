@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Doll ♡ comics</title>
+
+    <!-- Custom Font (Pixelify Sans) -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        --pink-bg: #ffe6f0;
+        --box-pink: #ffe6f0;
+        --text: #f975aa;
+        --white: #fff;
+
+        --polka-bg-image: radial-gradient(
+            rgb(255, 246, 248) 28.4%,
+            transparent 28.4%
+          ),
+          radial-gradient(rgb(255, 246, 248) 28.4%, transparent 28.4%);
+        --polka-bg-position: 0px 0px, 32px 32px;
+        --polka-bg-size: 64px 64px;
+        --polka-bg-color: #ffe6f0ff;
+      }
+
+      body {
+        background-color: var(--polka-bg-color);
+        background-image: var(--polka-bg-image);
+        background-position: var(--polka-bg-position);
+        background-size: var(--polka-bg-size);
+        color: var(--text);
+        font-family: "Pixelify Sans", "Baloo 2", cursive;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 25px 10px;
+        text-align: center;
+        scroll-behavior: smooth;
+        text-shadow: 0.5px 0 0 var(--text);
+      }
+
+      /* --- Universal pink containers --- */
+      .navbar,
+      .links,
+      .box {
+        background: var(--box-pink);
+        border-radius: 40px;
+        border: 10px solid var(--white);
+        box-shadow: 0 2px 8px rgba(255, 171, 205);
+        padding: 10px 20px;
+        margin: 10px 0;
+        width: 90%;
+        max-width: 520px;
+        box-sizing: border-box;
+        position: relative;
+      }
+
+      /* Navbar links */
+      .navbar a,
+      .links a {
+        color: var(--text);
+        text-decoration: none;
+        font-weight: 700;
+        margin: 0 5px;
+        text-shadow: 0.6px 0 0 var(--text);
+      }
+
+      .navbar a:hover,
+      .links a:hover {
+        text-decoration: underline;
+      }
+
+      /* Bow for main container */
+      .box .corner-bow {
+        position: absolute;
+        top: -20px;
+        left: -20px;
+        width: 70px;
+        height: 70px;
+        pointer-events: none;
+        transform: rotate(-10deg);
+        z-index: 10;
+      }
+
+      /* Bold text */
+      b,
+      strong {
+        font-weight: 800;
+        text-shadow: 0.5px 0 0 var(--text), -0.5px 0 0 var(--text);
+      }
+
+      /* Remove Strawpage branding if injected */
+      footer a[href*="straw.page"] {
+        display: none !important;
+      }
+      /* --- Popup Styles --- */
+      #age-verification-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: var(--polka-bg-color);
+        background-image: var(--polka-bg-image);
+        background-position: var(--polka-bg-position);
+        background-size: var(--polka-bg-size);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999; /* Ensure it's on top of everything */
+      }
+
+      #age-verification-box {
+        background: var(--box-pink);
+        border-radius: 40px;
+        border: 10px solid var(--white);
+        box-shadow: 0 2px 10px rgba(255, 171, 205);
+        padding: 30px;
+        width: 90%;
+        max-width: 400px;
+        box-sizing: border-box;
+        text-align: center;
+        position: relative;
+        color: var(--text);
+      }
+
+      #age-verification-box h2 {
+        font-size: 2.2rem;
+        margin-top: 0;
+        margin-bottom: 10px;
+        text-shadow: 1px 0 0 var(--text), -1px 0 0 var(--text);
+      }
+
+      #age-verification-box p {
+        font-size: 1.1rem;
+        margin-bottom: 10px;
+      }
+
+      #age-verification-box input[type="date"] {
+        padding: 10px;
+        border-radius: 18px;
+        border: 3px solid var(--text);
+        background-color: var(--white);
+        color: var(--text);
+        font-family: "Pixelify Sans", cursive;
+        font-size: 1.1rem;
+        margin-bottom: 12px;
+        width: calc(100% - 20px);
+        max-width: 250px;
+        box-sizing: border-box;
+        text-align: center;
+      }
+
+      #age-verification-box button {
+        background-color: var(--text);
+        color: var(--white);
+        border: none;
+        border-radius: 18px;
+        padding: 10px 20px;
+        font-family: "Pixelify Sans", cursive;
+        font-size: 1.2rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: background-color 0.2s;
+        text-shadow: 0.5px 0 0 var(--white);
+      }
+
+      #age-verification-box button:hover {
+        background-color: #e56394; /* slightly darker pink */
+      }
+
+      #age-verification-box .corner-bow {
+        /* Reuses existing bow style */
+        position: absolute;
+        top: -20px;
+        left: -20px;
+        width: 70px;
+        height: 70px;
+        pointer-events: none;
+        transform: rotate(-10deg);
+        z-index: 10;
+      }
+
+      /* small helper row for alt button */
+      #age-verification-box .alt-row {
+        margin-top: 8px;
+        display: flex;
+        justify-content: center;
+        gap: 8px;
+        align-items: center;
+      }
+
+      #error-message {
+        color: #e56394; /* a stronger warning color */
+        font-weight: 700;
+        margin-top: 10px;
+        min-height: 20px;
+      }
+
+      /* Desktop-specific text sizing */
+      @media (min-width: 800px) {
+        body {
+          font-size: 1.2rem;
+        }
+
+        .navbar a,
+        .links a {
+          font-size: 1.1rem;
+        }
+
+        .box {
+          font-size: 1.1rem;
+        }
+
+        /* Scale bow for desktop */
+        .box .corner-bow {
+          width: 100px;
+          height: 100px;
+          top: -30px;
+          left: -30px;
+        }
+      }
+      /* --- Universal Link Style --- */
+      a {
+        color: #ff6cae; /* your preferred pink color */
+        text-shadow: 0.5px 0 0 #ff6cae;
+        text-decoration: underline;
+      }
+
+      a:hover {
+        text-decoration: underline;
+        color: #ff408c; /* optional hover color */
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="age-verification-overlay" aria-hidden="false">
+      <div
+        id="age-verification-box"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Age verification"
+      >
+        <img
+          class="corner-bow"
+          src="https://cdn.imgchest.com/files/34000b252df3.png"
+          alt="Bow sticker"
+        />
+        <h2>🔞 Adult Content Warning</h2>
+        <p>
+          This site contains <strong>18+ content</strong>. Please verify your
+          birth date to continue.
+        </p>
+        <input
+          type="date"
+          id="birthdate-input"
+          required
+          aria-label="Enter your birth date"
+        />
+        <button id="enter-button">♡ Enter Site ♡</button>
+        <div class="alt-row"></div>
+        <div id="error-message" role="status" aria-live="polite"></div>
+      </div>
+    </div>
+    <!-- Logo -->
+    <header>
+      <img
+        src="https://cdn.imgchest.com/files/c5d667abcc3b.png"
+        alt="Doll logo"
+        style="width: 200px; height: auto; margin-bottom: 10px"
+      />
+    </header>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+      <a href="index.html">Home</a>⋆✿ <a href="posts.html">Posts</a>⋆✿
+      <a href="comics.html">Comics</a>⋆✿
+      <a href="galleries.html">Galleries</a>
+    </nav>
+
+    <!-- Main posts container -->
+    <div class="box">
+      <img
+        class="corner-bow"
+        src="https://cdn.imgchest.com/files/34000b252df3.png"
+        alt="Bow sticker"
+      />
+      <h2>My comics</h2>
+      <p>
+        Both of my long running fan and original comic links will go here! I
+        haven't finished any, but until then, check out my
+        <a href="galleries.html">Galleries</a> page for my more casual artwork!
+      </p>
+    </div>
+
+    <script>
+      // small helpers to set/get cookie
+      function setCookie(name, value, days) {
+        try {
+          let expires = "";
+          if (days) {
+            let date = new Date();
+            date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
+            expires = "; expires=" + date.toUTCString();
+          }
+          // Secure works on HTTPS (Netlify serves HTTPS). Remove "Secure" if testing on plain http.
+          document.cookie =
+            encodeURIComponent(name) +
+            "=" +
+            encodeURIComponent(value || "") +
+            expires +
+            "; path=/; SameSite=Lax; Secure";
+        } catch (e) {
+          console.warn("setCookie failed", e);
+        }
+      }
+      function getCookie(name) {
+        try {
+          let nameEQ = encodeURIComponent(name) + "=";
+          let ca = document.cookie.split(";");
+          for (let i = 0; i < ca.length; i++) {
+            let c = ca[i];
+            while (c.charAt(0) == " ") c = c.substring(1, c.length);
+            if (c.indexOf(nameEQ) === 0)
+              return decodeURIComponent(c.substring(nameEQ.length, c.length));
+          }
+        } catch (e) {
+          console.warn("getCookie failed", e);
+        }
+        return null;
+      }
+
+      // Age verification
+      document.addEventListener("DOMContentLoaded", () => {
+        const overlay = document.getElementById("age-verification-overlay");
+        const input = document.getElementById("birthdate-input");
+        const button = document.getElementById("enter-button");
+        const altButton = document.getElementById("alt-enter");
+        const error = document.getElementById("error-message");
+        const requiredAge = 18;
+
+        if (!overlay || !input || !button || !error) {
+          console.error("Age verification elements missing");
+          return;
+        }
+
+        // set input.max to today minus requiredAge years (so user can't pick a date that would always make them too young)
+        try {
+          const today = new Date();
+          const maxYear = today.getFullYear() - requiredAge;
+          const maxMonth = String(today.getMonth() + 1).padStart(2, "0");
+          const maxDay = String(today.getDate()).padStart(2, "0");
+          input.max = `${maxYear}-${maxMonth}-${maxDay}`;
+        } catch (e) {
+          // ignore if date calc fails
+        }
+
+        // hide overlay if cookie already set
+        try {
+          if (getCookie("age_verified") === "true") {
+            overlay.style.display = "none";
+            overlay.setAttribute("aria-hidden", "true");
+            return;
+          }
+        } catch (e) {
+          console.warn("cookie check failed", e);
+        }
+
+        function showError(msg) {
+          if (error) error.textContent = msg;
+        }
+
+        function verifyAndEnter(bypass = false) {
+          try {
+            if (bypass) {
+              setCookie("age_verified", "true", 365);
+              overlay.style.display = "none";
+              overlay.setAttribute("aria-hidden", "true");
+              return;
+            }
+            const birthDateString = input.value;
+            if (!birthDateString) {
+              showError("❗ Please enter your birth date.");
+              return;
+            }
+            const birthDate = new Date(birthDateString);
+            if (isNaN(birthDate.getTime())) {
+              showError("❗ Invalid date format.");
+              return;
+            }
+
+            const today = new Date();
+            let age = today.getFullYear() - birthDate.getFullYear();
+            const m = today.getMonth() - birthDate.getMonth();
+            if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+              age--;
+            }
+
+            if (age >= requiredAge) {
+              setCookie("age_verified", "true", 365);
+              overlay.style.display = "none";
+              overlay.setAttribute("aria-hidden", "true");
+            } else {
+              showError(
+                "🚫 Sorry, you must be 18 or older to enter this site."
+              );
+            }
+          } catch (e) {
+            console.error("verify failed", e);
+            showError("❗ Something went wrong. Try again.");
+          }
+        }
+
+        button.addEventListener("click", (e) => {
+          e.preventDefault();
+          verifyAndEnter(false);
+        });
+
+        // alt quick entry (useful on mobile)
+        if (altButton) {
+          altButton.addEventListener("click", (e) => {
+            e.preventDefault();
+            verifyAndEnter(true);
+          });
+        }
+
+        // allow Enter key inside date input to trigger
+        input.addEventListener("keypress", (e) => {
+          if (e.key === "Enter") {
+            e.preventDefault();
+            verifyAndEnter(false);
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
