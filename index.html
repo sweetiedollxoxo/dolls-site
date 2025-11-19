@@ -599,7 +599,41 @@
       
         <img class="popup-bow" src="https://cdn.imgchest.com/files/34000b252df3.png" alt="">
       </div>
-      
+
+      <div id="popup-contents" style="display:none;">
+
+  <div data-key="dni">
+    <h3>♡ Dni</h3>
+    <p>Your DNI text goes here…</p>
+  </div>
+
+  <div data-key="fandoms">
+    <h3>♡ Fandoms</h3>
+    <p>Fandom notes & favorites go here.</p>
+  </div>
+
+  <div data-key="links">
+    <h3>♡ Links</h3>
+    <p>Links go here.</p>
+  </div>
+
+  <div data-key="cws">
+    <h3>♡ Content warnings</h3>
+    <p>Warnings go here.</p>
+  </div>
+
+  <div data-key="chars">
+    <h3>♡ Character profiles</h3>
+    <p>Character info here.</p>
+  </div>
+
+  <div data-key="codes">
+    <h3>♡ Website codes</h3>
+    <p>Your code notes go here.</p>
+  </div>
+
+</div>
+
 
     <script>
       /* unchanged JS */
@@ -660,37 +694,6 @@
         const expandedInner = document.getElementById("expandedInner");
         const divider = document.getElementById("toggleDivider");
 
-        const contents = {
-          dni: {
-            title: "♡ Dni",
-            html: `<p>If you want, I can also make it so each popup can close when clicked outside or when you add a little close button, so it behaves more like traditional popups.
-
-Do you want me to add that?If you want, I can also make it so each popup can close when clicked outside or when you add a little close button, so it behaves more like traditional popups.
-
-Do you want me to add that?If you want, I can also make it so each popup can close when clicked outside or when you add a little close button, so it behaves more like traditional popups.
-
-Do you want me to add that?If you want, I can also make it so each popup can close when clicked outside or when you add a little close button, so it behaves more like traditional popups.
-
-Do you want me to add that?</p>`,
-          },
-          fandoms: {
-            title: "♡ Fandoms",
-            html: `<p>Fandom notes & favorites go here.</p>`,
-          },
-          links: { title: "♡ Links", html: `<p>Links go here.</p>` },
-          cws: {
-            title: "♡ Content warnings",
-            html: `<p>Warnings go here.</p>`,
-          },
-          chars: {
-            title: "♡ Character profiles",
-            html: `<p>Character info here.</p>`,
-          },
-          codes: {
-            title: "♡ Website codes",
-            html: `<p>Your code notes go here.</p>`,
-          },
-        };
 
         let openKey = null;
 
