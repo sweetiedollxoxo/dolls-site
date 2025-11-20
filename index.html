@@ -16,9 +16,7 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
     />
     <style>
-      :root {
-        --pink-bg: #ffe6f0;
-        --box-pink: #ffe6f0;
+     :root {
         --text: #f975aa;
         --white: #fff;
 
@@ -27,16 +25,14 @@
             transparent 28.4%
           ),
           radial-gradient(rgb(255, 246, 248) 28.4%, transparent 28.4%);
-        --polka-bg-position: 0px 0px, 32px 32px;
-        --polka-bg-size: 64px 64px;
         --polka-bg-color: #ffe6f0ff;
       }
 
       body {
         background-color: var(--polka-bg-color);
         background-image: var(--polka-bg-image);
-        background-position: var(--polka-bg-position);
-        background-size: var(--polka-bg-size);
+        background-size: 64px 64px;
+        background-position: 0 0, 32px 32px;
         color: var(--text);
         font-family: "Pixelify Sans", cursive;
         display: flex;
@@ -46,6 +42,18 @@
         text-align: center;
         scroll-behavior: smooth;
         text-shadow: 0.5px 0 0 var(--text);
+
+        /* Animation */
+        animation: movePolka 8s linear infinite;
+      }
+
+      @keyframes movePolka {
+        0% {
+          background-position: 0 0, 32px 32px;
+        }
+        100% {
+          background-position: -64px -64px, -32px -32px;
+        }
       }
 
       .navbar,
