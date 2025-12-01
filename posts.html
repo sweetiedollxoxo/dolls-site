@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Doll ♡</title>
+    <!-- Fredoka Sans font -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Font Awesome: all icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+
+    <style>
+      :root {
+        --pink: #ffc3d8;
+        --white: #ffffff;
+        --polka-bg-image: radial-gradient(
+            rgb(255, 246, 248) 28.4%,
+            transparent 28.4%
+          ),
+          radial-gradient(rgb(255, 246, 248) 28.4%, transparent 28.4%);
+        --polka-bg-color: #ffe6f0ff;
+      }
+
+      body {
+        background-color: var(--polka-bg-color);
+        background-image: var(--polka-bg-image);
+        background-size: 64px 64px;
+        background-position: 0 0, 32px 32px;
+
+        font-family: "Fredoka", sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 25px 10px;
+        text-align: center;
+
+        animation: movePolka 8s linear infinite;
+
+        color: #fe9fc5;
+        font-weight: 460;
+      }
+
+      @keyframes movePolka {
+        0% {
+          background-position: 0 0, 32px 32px;
+        }
+        100% {
+          background-position: -64px -64px, -32px -32px;
+        }
+      }
+
+      .container {
+  transform-origin: top center;
+  width: 100%;
+  max-width: 600px;  /* SAME as your content-wrapper */
+}
+
+      /* This wrapper ensures navbar and pink-box widths match home page */
+      .content-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        max-width: 600px;
+        box-sizing: border-box;
+      }
+
+      header img.logo {
+        width: 200px;
+        height: auto;
+        margin-bottom: 15px;
+      }
+
+      nav {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        background-color: #ffe6f0;
+        border: 6px solid var(--white);
+        border-radius: 40px;
+        padding: 16px 20px;
+        max-width: 560px;
+        width: 100%;
+        height: 80px;
+        box-sizing: border-box;
+        box-shadow: 0 0 0 10px var(--pink);
+      }
+
+      nav a {
+        text-decoration: none;
+        color: #fe9fc5;
+        font-size: 18px;
+        font-weight: 700;
+        padding: 5px 10px;
+        transition: none;
+      }
+
+      nav a:hover {
+        transform: none;
+      }
+
+      .pink-box {
+        margin-top: 30px;
+        position: relative;
+        background-color: #ffe6f0;
+        border: 6px solid var(--white);
+        border-radius: 40px;
+        padding: 20px;
+        max-width: 560px;
+        width: 100%;
+        box-sizing: border-box;
+        box-shadow: 0 0 0 10px var(--pink);
+      }
+
+      .pink-box .bow-sticker {
+        position: absolute;
+        top: -49px;
+        left: -40px;
+        width: 116px;
+        height: auto;
+        pointer-events: none;
+        transform: rotate(-15deg);
+      }
+
+      .pink-box img.post-img {
+  max-width: 100%;
+  width: 100%;
+  height: auto;
+  border-radius: 30px;
+  display: block;
+  margin: 0 auto;
+}
+
+      a {
+        color: #fe9fc5;
+        text-decoration: none;
+        position: relative;
+        font-weight: 700;
+        transition: all 0.2s ease;
+      }
+
+      a::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        height: 2px;
+        width: 0%;
+        background-color: #fe9fc5;
+        border-radius: 2px;
+        transition: width 0.2s ease;
+      }
+
+      a:hover::after {
+        width: 100%;
+      }
+      /* Lightbox overlay */
+      #lightbox {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(255, 182, 193, 0.5); /* hot pink semi-transparent */
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+      }
+
+      /* Lightbox content wrapper */
+      #lightbox > div {
+        position: relative;
+      }
+
+      /* Lightbox image */
+      #lightbox-img {
+        max-width: 90vw;
+        max-height: 90vh;
+        border-radius: 30px;
+        box-shadow: 0 0 20px rgba(255, 171, 205, 0.7);
+      }
+
+      #lightbox > div {
+        position: relative;
+        display: inline-block; /* ensures the image sizes naturally */
+      }
+
+      /* Close button outside the image */
+      #lightbox-close {
+        position: absolute;
+        top: -20px; /* moves it above the image */
+        right: -40px; /* moves it to the right of the image */
+        width: 35px;
+        height: 35px;
+        background: white;
+        border-radius: 50%;
+        color: #ffabcd;
+        font-weight: bold;
+        font-size: 24px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        box-shadow: 0 0 10px rgba(255, 171, 205, 0.7);
+      }
+
+      /* Secondary page nav styling */
+      .page-nav {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 5px; /* small gap between links and note */
+
+        /* Match main navbar styles */
+        background-color: #ffe6f0;
+        border: 6px solid #ffffff;
+        border-radius: 40px;
+        padding: 12px 20px;
+        max-width: 560px;
+        width: 100%;
+        box-sizing: border-box;
+        box-shadow: 0 0 0 10px #ffc3d8;
+        margin-top: 15px; /* spacing from main navbar or content above */
+      }
+
+      .page-links {
+        display: flex;
+        gap: 8px;
+        font-weight: 700;
+        font-size: 18px;
+        color: #fe9fc5;
+      }
+
+      .page-links a {
+        color: #fe9fc5;
+        text-decoration: none;
+        position: relative;
+      }
+
+      .page-links a::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -2px;
+        height: 2px;
+        width: 0%;
+        background-color: #fe9fc5;
+        border-radius: 2px;
+        transition: width 0.2s ease;
+      }
+
+      .page-links a:hover::after {
+        width: 100%;
+      }
+
+      .page-note {
+        font-size: 14px;
+        font-weight: 460;
+        color: #fe9fc5;
+        text-align: center;
+      }
+      /* Search bar styling */
+      .search-container {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-top: 8px;
+        width: 68%;
+      }
+
+      #post-search {
+        flex: 1;
+        padding: 8px 12px;
+        border-radius: 20px;
+        border: 3px solid #fe9fc5;
+        font-size: 16px;
+        font-family: "Fredoka", sans-serif;
+        outline: none;
+      }
+
+      #post-search::placeholder {
+        color: #fe9fc5;
+        opacity: 0.7;
+      }
+
+      #search-back i {
+        color: #fe9fc5;
+        font-size: 18px;
+      }
+
+      /* Mobile adjustments */
+      @media (max-width: 480px) {
+        #lightbox-img {
+          max-width: 90%;
+          max-height: calc(100vh - 120px); /* extra room for close button */
+        }
+
+        #lightbox-close {
+          top: -5px;
+          right: 5px;
+          transform: scale(0.9);
+        }
+      }
+
+      /* Responsive video embed */
+.responsive-video {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  padding-bottom: 56.25%; /* 16:9 aspect ratio */
+  height: 0;
+  overflow: hidden;
+  border-radius: 30px;
+}
+
+.responsive-video iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  border-radius: 30px;
+}
+
+
+/* Hide orientation warning for all non-touch (desktop) devices */
+@media (hover: hover) and (pointer: fine) {
+  #orientation-warning {
+    display: none !important;
+  }
+}
+
+.divider-wrapper {
+  margin: 20px -20px; /* keep your full-width stretch */
+}
+
+.my-divider {
+  height: 5px;
+    background: #ffc3d8;
+    margin: 10px 0 20px 0;
+    width: calc(100% + 11px);
+    margin-left: -5.5px;
+}
+
+/* Removed post styling */
+.removed-post {
+  opacity: 0.7; /* faded but readable */
+  font-style: italic;
+  pointer-events: none; /* disable clicks on links/icons */
+  position: relative; /* for the icon positioning */
+}
+
+.removed-post .post-icons,
+.removed-post a {
+  pointer-events: none; /* disable clicks */
+  color: #fe9fc5; /* keep faded pink color */
+}
+
+.removed-post img.post-img {
+  filter: grayscale(100%) brightness(80%); /* faded image */
+}
+
+.removed-post .bow-sticker {
+  font-size: 70px; /* same as original bow width */
+  top: -35px;       /* match original bow top */
+  left: -40px;      /* match original bow left */
+  transform: rotate(-15deg);
+  color: #fe9fc5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
+}
+
+
+
+    </style>
+  </head>
+
+  <body>
+
+     <!-- FULL SCREEN LIGHTBOX -->
+     <div id="lightbox">
+      <div>
+        <img id="lightbox-img" src="" alt="Lightbox" />
+        <span id="lightbox-close">×</span>
+      </div>
+    </div>
+  </div>
+
+    <div class="container">
+      <header>
+        <img
+          src="https://cdn.imgchest.com/files/c5d667abcc3b.png"
+          alt="Doll logo"
+          class="logo"
+        />
+      </header>
+
+      <div class="content-wrapper">
+        <nav>
+          <a href="index.html">Home</a>
+          <a href="shop.html">Shop</a>
+          <a href="posts.html">Posts</a>
+          <a href="comics.html">Comics</a>
+          <a href="galleries.html">Galleries</a>
+        </nav>
+
+        <!-- Secondary page nav -->
+        <div class="page-nav">
+          <div class="page-links">
+            <a href="posts.html?page=1">Page 1</a> -
+            <a href="posts.html?page=2">next page</a>
+          </div>
+          <div class="page-note">next page will be added after this page reaches 100 posts</div>
+
+          <!-- Search input -->
+          <div class="search-container">
+            <input type="text" id="post-search" placeholder="search ♡" />
+            <span
+              id="search-back"
+              title="Back"
+              style="display: none; cursor: pointer"
+            >
+              <i class="fa-solid fa-arrow-left"></i>
+            </span>
+          </div>
+        </div>
+
+        <!-- First pink box -->
+        <div class="pink-box">
+          <img
+            src="https://cdn.imgchest.com/files/34000b252df3.png"
+            class="bow-sticker"
+            alt="Bow sticker"
+          />
+          <h2>Post #1</h2>
+          <p>● Nov 29 2025 ●</p>
+          <div class="divider-wrapper">
+            <div class="my-divider"></div>
+          </div>
+          <p style="text-align: left; padding: 0 20px"><b>WELCOME to your new posts page!</b></p>
+            <img
+            src="https://i.pinimg.com/736x/ed/16/8e/ed168e6c1416d826e879b90886432b6f.jpg"
+            alt="Example image"
+            class="post-img"
+          />
+
+          <p style="padding: 0 20px"><b>tags : #example #example #example</b></p>
+
+          <div class="divider-wrapper">
+            <div class="my-divider"></div>
+          </div>
+
+          <p style="text-align: left; padding: 0 20px">● If you want to comment, remember to type in 
+          "post #[the posts number]" before your comment — helps me know 
+          which post you're talking about! Applies to replies too. ♡
+        </p>
+         <!-- Icons as links -->
+  <div class="post-icons" style="padding: 10px 20px; display: flex; gap: 15px;">
+    <a href="https://mb.boardhost.com/sweetiedollxoxo/" style="color: #fe9fc5; text-decoration: none;">
+      <i class="fa-solid fa-comment"></i>
+    </a>
+    <a href="https://tripetto.app/run/NCSL1R58KV" style="color: #fe9fc5; text-decoration: none;">
+      <i class="fa-solid fa-heart"></i>
+    </a>
+        </div> 
+      </div>
+    </div>
+  </div>
+
+
+    <script>
+      const lightbox = document.getElementById("lightbox");
+      const lightboxImg = document.getElementById("lightbox-img");
+      const closeBtn = document.getElementById("lightbox-close");
+
+      // Make all post images clickable
+      document.querySelectorAll(".pink-box img").forEach((img) => {
+        img.style.cursor = "pointer";
+        img.addEventListener("click", () => {
+          lightbox.style.display = "flex";
+          lightboxImg.src = img.src;
+        });
+      });
+
+      // Close lightbox on X click
+      closeBtn.addEventListener("click", () => {
+        lightbox.style.display = "none";
+      });
+
+      // Close lightbox if clicking outside the image
+      lightbox.addEventListener("click", (e) => {
+        if (e.target === lightbox) {
+          lightbox.style.display = "none";
+        }
+      });
+
+      // Search functionality
+      const searchInput = document.getElementById("post-search");
+      const searchBack = document.getElementById("search-back");
+      const posts = document.querySelectorAll(".pink-box"); // all posts
+
+      function resetPosts() {
+        posts.forEach((post) => (post.style.display = ""));
+        searchInput.value = "";
+        searchBack.style.display = "none";
+      }
+
+      searchInput.addEventListener("keypress", (e) => {
+        if (e.key === "Enter") {
+          const keyword = searchInput.value.toLowerCase();
+          posts.forEach((post) => {
+            const text = post.textContent.toLowerCase();
+            post.style.display = text.includes(keyword) ? "" : "none";
+          });
+          searchBack.style.display = "inline-block";
+        }
+      });
+
+      searchBack.addEventListener("click", () => {
+        resetPosts();
+      });
+
+      // Function to set lazy loading on images
+function enableLazyLoading(target = document) {
+  target.querySelectorAll('.pink-box img.post-img, .pink-box .bow-sticker').forEach(img => {
+    if (!img.hasAttribute('loading')) {
+      img.setAttribute('loading', 'lazy');
+    }
+  });
+}
+
+// Apply lazy loading to all existing images
+enableLazyLoading();
+
+// Optional: observe the DOM for any new images added dynamically
+const observer = new MutationObserver(mutations => {
+  mutations.forEach(mutation => {
+    mutation.addedNodes.forEach(node => {
+      if (node.nodeType === 1) { // element node
+        enableLazyLoading(node);
+      }
+    });
+  });
+});
+
+observer.observe(document.body, { childList: true, subtree: true });
+
+// ORIENTATION WARNING //
+
+// Detect if device is touch-based (phones/tablets)
+const isMobile = matchMedia("(hover: none) and (pointer: coarse)").matches;
+
+function checkOrientation() {
+  // If not mobile → NEVER show the overlay
+  if (!isMobile) return;
+
+  const warning = document.getElementById('orientation-warning');
+
+  if (window.innerWidth < window.innerHeight) {
+    // Portrait → show warning (mobile only)
+    warning.style.display = 'flex';
+  } else {
+    // Landscape → hide warning
+    warning.style.display = 'none';
+  }
+}
+
+// Run on load and on resize/orientation change
+window.addEventListener('load', checkOrientation);
+window.addEventListener('resize', checkOrientation);
+window.addEventListener('orientationchange', checkOrientation);
+
+    </script>
+
+    <!-- Orientation warning overlay -->
+<div id="orientation-warning" style="
+display: none;
+position: fixed;
+inset: 0;
+background: #ffe6f0;
+font-family: 'Fredoka', sans-serif;
+text-align: center;
+padding-top: 15vh; 
+z-index: 9999;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: flex-start;
+gap: 20px;
+">
+
+<img 
+  src="https://file.garden/Z48EmHj5okOfzdFf/Images%20for%20site%20decor/warning-svgrepo-com.svg"
+  alt="warning svg image"
+  style="
+    width: 150px; 
+    height: 150px; 
+    image-rendering: pixelated;
+    filter: invert(82%) sepia(37%) saturate(986%) hue-rotate(290deg) brightness(103%) contrast(101%);
+  "
+/>
+
+<span style="
+  color: #fe9fc5; 
+  font-size: 35px; 
+  font-weight: bold; 
+  line-height: 1.2;
+">
+  <p>(,,>﹏<,,)</p>
+  ♡ Please rotate your device to landscape.  
+  My site's not super mobile friendly, sorry!
+</span>
+
+</div>
+
+  </body>
+</html>

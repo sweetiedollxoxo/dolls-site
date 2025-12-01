@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Doll ♡</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <!-- Fredoka Sans font -->
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+      :root {
+        --pink: #ffc3d8;
+        --white: #ffffff;
+        --polka-bg-image: radial-gradient(
+            rgb(255, 246, 248) 28.4%,
+            transparent 28.4%
+          ),
+          radial-gradient(rgb(255, 246, 248) 28.4%, transparent 28.4%);
+        --polka-bg-color: #ffe6f0ff;
+      }
+
+      body {
+  background-color: var(--polka-bg-color);
+  background-image: var(--polka-bg-image);
+  background-size: 64px 64px;
+  background-position: 0 0, 32px 32px;
+  font-family: "Fredoka", sans-serif;
+
+  /* REMOVE flex centering */
+  display: block;
+  padding: 25px 10px;
+  text-align: center;
+
+  animation: movePolka 8s linear infinite;
+  color: #fe9fc5;
+  font-weight: 460;
+}
+
+      @keyframes movePolka {
+        0% {
+          background-position: 0 0, 32px 32px;
+        }
+        100% {
+          background-position: -64px -64px, -32px -32px;
+        }
+      }
+
+      .container {
+        transform-origin: top center;
+        width: 100%;
+        max-width: 600px;
+        margin-left: auto;   /* center horizontally */
+        margin-right: auto;  /* center horizontally */
+
+      }
+      .content-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 600px;
+  box-sizing: border-box;
+  align-items: center; /* This centers children */
+  margin: 0 auto; /* This centers the wrapper itself */
+}
+
+      header img.logo {
+        width: 200px;
+        height: auto;
+        margin-bottom: 15px;
+      }
+
+      nav {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        background-color: #ffe6f0;
+        border: 6px solid var(--white);
+        border-radius: 40px;
+        padding: 16px 20px;
+        max-width: 560px;
+        width: 100%;
+        height: 80px;
+        box-sizing: border-box;
+        box-shadow: 0 0 0 10px var(--pink);
+      }
+
+      nav a {
+        text-decoration: none;
+        color: #fe9fc5;
+        font-size: 18px;
+        font-weight: 700;
+        padding: 5px 10px;
+
+        /* hover removed */
+        transition: none;
+      }
+
+      nav a:hover {
+        transform: none;
+      }
+      /* New container styled like navbar */
+      .pink-box {
+        margin-top: 30px;
+        margin-left: auto;
+        margin-right: auto;
+        position: relative;
+        background-color: #ffe6f0;
+        border: 6px solid var(--white);
+        border-radius: 40px;
+        padding: 20px;
+        width: 100%;
+        max-width: 560px;
+        box-sizing: border-box;
+        box-shadow: 0 0 0 10px var(--pink);
+      }
+
+      /* Bow sticker */
+      .pink-box .bow-sticker {
+        position: absolute;
+        top: -49px; /* adjust if needed */
+        left: -40px; /* adjust if needed */
+        width: 116px; /* size of bow */
+        height: auto;
+        pointer-events: none;
+        transform: rotate(-15deg); /* tilt it cute */
+      }
+      .container img {
+        max-width: 100%;
+        height: auto;
+      }
+      /* General links style */
+      a {
+        color: #fe9fc5; /* pink text */
+        text-decoration: none;
+        position: relative; /* for the underline pseudo-element */
+        font-weight: 700; /* optional: match navbar font weight */
+        transition: all 0.2s ease;
+      }
+
+      /* Underline effect using ::after */
+      a::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        height: 2px;
+        width: 0%; /* hidden by default */
+        background-color: #fe9fc5; /* matches link text */
+        border-radius: 2px;
+        transition: width 0.2s ease;
+      }
+
+      /* Expand underline on hover */
+      a:hover::after {
+        width: 100%;
+      }
+
+      .sub-links {
+        display: flex;
+        justify-content: center;
+        gap: 25px;
+        margin-top: 10px;
+      }
+
+      .sub-links a {
+        text-decoration: none;
+        color: #fe9fc5; /* same as navbar text */
+        font-size: 18px;
+        font-weight: 700;
+        position: relative;
+        padding-bottom: 2px; /* space for underline */
+        transition: all 0.2s ease;
+      }
+
+      /* Hover underline effect */
+      .sub-links a:hover::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        height: 2px;
+        width: 100%;
+        background-color: #fe9fc5; /* matches text color */
+        border-radius: 2px;
+      }
+      /* Container for iPod + About */
+      .player-about-container {
+        display: flex;
+        flex-direction: column; /* stack them */
+        align-items: center;    /* center horizontally */
+        gap: 20px;
+        align-items: center;
+        margin-top: 20px;
+      }
+
+     /* SAFE PLAYER ONLY affects .cute-player */
+.cute-player {
+  width: 100%;
+  max-width: 330px;
+  margin: 0 auto;
+  padding: 18px;
+  border: 5px solid #ffd3e6;
+  border-radius: 40px;
+  background: #ffeef7;
+  font-family: inherit;
+  text-align: center;
+}
+
+/* Button row */
+.controls-row {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+/* Buttons */
+.cp-btn {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: none;
+  background: #ffd9eb;
+  color: #fe9fc5;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.cp-btn.play {
+  background: #fff2f8;
+  border: 1px solid #ffcae4;
+}
+
+.cp-btn:hover {
+  transform: scale(1.06);
+}
+
+/* Progress area */
+.progress-area {
+  width: 100%;
+  margin-top: 10px;
+}
+
+/* Progress bar background */
+.progress-bar-bg {
+  width: 100%;
+  height: 8px;
+  background: #ffdcea;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+/* Progress fill */
+.progress-bar-fill {
+  width: 0%;
+  height: 100%;
+  background: linear-gradient(to right, #ffbad6, #ff82b6);
+  transition: width 0.1s linear;
+}
+
+/* Time row */
+.time-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  margin-top: 6px;
+  color: #a5768c;
+}
+
+
+      /* About section */
+      .about-scroll {
+        border: 6px solid #ffc3d8;
+        border-radius: 40px;
+        padding: 10px;
+        max-width: 330px;
+        width: 100%;
+        height: 200px;
+        overflow-y: auto;
+        font-size: 14px;
+      }
+      /* Optional: scrollbar style */
+      .about-scroll::-webkit-scrollbar {
+        width: 8px;
+        border-radius: 10px;
+      }
+
+      .about-scroll::-webkit-scrollbar-thumb {
+        background-color: #ffc3d8;
+        border-radius: 10px;
+      }
+      .about-scroll::-webkit-scrollbar-track {
+        background: #ffe6f0;
+        border-radius: 10px;
+      }
+      /* cute bordered button links under iPod + About */
+      .info-links {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: left;
+        gap: 15px;
+        margin-top: 25px;
+      }
+
+      .info-links a {
+        text-decoration: none;
+        color: #fe9fc5;
+        font-weight: 700;
+        font-size: 16px;
+
+        padding: 6px 14px;
+        border: 6px solid #ffc3d8; /* SAME as iPod and About borders */
+        border-radius: 25px;
+
+        position: relative;
+        transition: transform 0.15s ease;
+      }
+
+      /* Slight hover animation (cute bounce) */
+      .info-links a:hover {
+        transform: translateY(-3px);
+      }
+
+      /* Remove underline animation for these specific links */
+      .info-links a::after {
+        display: none !important;
+      }
+
+
+  /* Hide vertical scrollbar for About section on mobile */
+  .about-scroll {
+    scrollbar-width: none; /* Firefox */
+  }
+
+  .about-scroll::-webkit-scrollbar {
+    width: 0; /* Chrome/Safari */
+  }
+
+
+.white-inner-box {
+  background: white;
+  border-radius: 30px;
+  padding: 25px;
+  box-sizing: border-box;
+  width: 100%;
+  margin-top: 10px;
+}
+
+/* Hide orientation warning for all non-touch (desktop) devices */
+@media (hover: hover) and (pointer: fine) {
+  #orientation-warning {
+    display: none !important;
+  }
+}
+
+.player-text {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.song-title {
+  font-family: "Fredoka", sans-serif;
+  font-size: 16px;
+  color: #ff7eb8; /* light strawberry pink */
+  margin: 0;
+}
+
+.heart-bar {
+  font-size: 14px;
+  color: #ff9fcf; /* lighter pastel pink */
+  margin: 4px 0 0 0;
+  letter-spacing: 1px;
+}
+
+.player-about-container {
+  position: relative;
+}
+
+.cute-player {
+  position: relative; /* required for absolute sticker inside */
+  overflow: visible;  /* allows sticker to poke out */
+}
+
+.player-sticker {
+  position: absolute;
+  top: -28px;           /* how much it overlaps the top */
+  left: 50%;            /* center horizontally */
+  transform: translateX(-50%);
+  z-index: 10;
+  pointer-events: none; /* doesn't block buttons */
+}
+
+.player-sticker img {
+  width: 50px;           /* small sticker size */
+  height: auto;
+}
+
+#home-content {
+  width: 100%;
+}
+    </style>
+  </head>
+
+  <body>
+
+    <div class="container">
+      <header>
+        <img
+          src="https://cdn.imgchest.com/files/c5d667abcc3b.png"
+          alt="Doll logo"
+          class="logo"
+        />
+      </header>
+
+      <div class="content-wrapper">
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="shop.html">Shop</a>
+        <a href="posts.html">Posts</a>
+        <a href="comics.html">Comics</a>
+        <a href="galleries.html">Galleries</a>
+      </nav>
+
+      <!-- This is where link content will appear -->
+<div id="dynamic-box-area"></div>
+
+
+<div id="home-content">
+
+      <!-- first container under nav -->
+      <div class="pink-box">
+        <img
+          src="https://cdn.imgchest.com/files/34000b252df3.png"
+          class="bow-sticker"
+          alt="Bow sticker"
+        />
+        <!-- Middle image -->
+        <img
+          src="https://cdn.imgchest.com/files/1aa98ed1afb6.gif"
+          alt="Middle gif"
+          style="width: 410px; height: auto"
+        />
+        <p style="font-size: 18px">♡┊[ welcome ] .ᐟ</p>
+
+      <!-- Sub-links row -->
+<div class="sub-links">
+  <a href="sub.html">Subscribe ⋆✿</a>
+  <a href="ask.html">Ask ⋆✿</a>
+  <a href="message.html">Message ⋆✿</a>
+  <a href="tipjar.html">Tip jar ⋆✿</a>
+</div>
+
+        <p style="margin-top: 15px">press the ipod ♡</p>
+        <p style="font-size: 13px"><a href="https://www.tumblr.com/nekomimiyu">pixel gifs credit ദ്ദി(˵ •̀ ᴗ - ˵ ) ✧</a>
+      </div>
+
+      <!-- second container / under first container! -->
+
+      <div class="pink-box">
+        <img
+          src="https://cdn.imgchest.com/files/34000b252df3.png"
+          class="bow-sticker"
+          alt="Bow sticker"
+        />
+        <!-- Separate sub container for iPod + About -->
+        <div class="player-about-container">
+          <div class="cute-player">
+
+            <audio id="player-audio" src="https://file.garden/Z48EmHj5okOfzdFf/sound%20effects/Cotton%20Candy%20Skies.mp3"></audio>
+          
+            <div class="player-sticker">
+              <img src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExZ3JpaDgybjNoeGY0Zmw1N3N1MzhuYXozbXNlNHpmM2tmd2cxMjZ2dCZlcD12MV9pbnRlcm5hbF9naWQmY3Q9cw/nBRm2zMTYALaREiLcJ/giphy.gif" alt="Heart sticker">
+            </div>
+            
+             <!-- ⭐️ PASTE THE TITLE + HEART HERE ⭐️ -->
+    <div class="player-text">
+      <p class="song-title">꒰ . cotton candy skies  .ᐟ  ֹ   ₊ ꒱</p>
+      <p style="font-size: 10px;">「 ✦ esthie ✦ 」</p>
+    </div>
+    <!-- ⭐️ END INSERT ⭐️ -->
+
+            <div class="controls-row">
+              <button class="cp-btn" id="backBtn"><i class="fas fa-step-backward"></i></button>
+              <button class="cp-btn" id="rewindBtn"><i class="fas fa-backward"></i></button>
+              <button class="cp-btn play" id="playPauseBtn"><i class="fas fa-play"></i></button>
+              <button class="cp-btn" id="forwardBtn"><i class="fas fa-forward"></i></button>
+              <button class="cp-btn" id="skipBtn"><i class="fas fa-step-forward"></i></button>
+            </div>
+          
+            <div class="progress-area">
+              <div class="progress-bar-bg">
+                <div class="progress-bar-fill" id="progressFill"></div>
+              </div>
+              <div class="time-row">
+                <span id="currentTime">0:00</span>
+                <span id="totalTime">0:00</span>
+              </div>
+            </div>
+          </div>
+          
+
+          <!-- About section -->
+          <div class="about-scroll">
+            <h2>♡ About ♡</h2>
+            <p>
+              <b>Hello!</b> I'm Doll, a cutesy pink aesthetic lover who enjoys creating
+              art, music playlists, and fun interactive pages. This is my
+              personal space where I share my little digital world with you.
+              Feel free to explore my posts, comics, and galleries!
+            </p>
+            <p>
+              I like soft pastels, pixel fonts, and anything that brings a warm,
+              playful vibe. Keep scrolling for more tidbits about me and my
+              projects!
+            </p>
+          </div>
+        </div>
+        <!-- Cute bordered links under the iPod + About section -->
+      <!-- Link list + GIF side-by-side -->
+      <div style="
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      gap: 30px;
+      margin-top: 20px;
+    ">
+    
+     <!-- LEFT COLUMN: PERFECTLY ALIGNED LINKS -->
+<div style="display: flex; gap: 30px; margin-top: 20px;">
+  <div style="display: flex; flex-direction: column; gap: 6px; text-align: left; font-size: 18px;">
+    <a href="#" class="toggle-box" data-target="box-dni">♡ Dni</a>
+    <a href="#" class="toggle-box" data-target="box-fandoms">♡ Fandoms</a>
+    <a href="#" class="toggle-box" data-target="box-socials">♡ Socials</a>
+    <a href="#" class="toggle-box" data-target="box-cw">♡ Content warnings</a>
+    <a href="#" class="toggle-box" data-target="box-char">♡ Character profiles</a>
+    <a href="#" class="toggle-box" data-target="box-codes">♡ Website codes</a>
+  </div>
+
+  <!-- RIGHT COLUMN: BOXES / GIF -->
+  <div id="right-display" style="position: relative; width: 200px;">
+    <!-- Default GIF -->
+    <img
+      id="default-gif"
+      src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExajN4ZnhmMHd6NWU5YmI0Z2NkbjJiNzJkOGFjaHRxbXF0Mmhpdmc0ayZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/3LWy5senb4QFCIqgYd/giphy.gif"
+      style="width: 180px; height: auto; display: block;"
+    />
+  </div>
+</div>
+</div>
+</div>
+
+<!-- NEW: toggle content output box -->
+<div id="toggle-output" class="pink-box" style="display:none; margin-top: 25px; position: relative;">
+  <!-- bow sticker, correctly placed -->
+  <img
+    src="https://cdn.imgchest.com/files/34000b252df3.png"
+    class="bow-sticker"
+    alt="Bow sticker"
+  />
+
+  <!-- inner content gets injected here -->
+  <div id="toggle-output-inner" style="text-align:left; padding: 20px;"></div>
+
+<!-- Hidden boxes (can live anywhere in the HTML, we usually put them at the end) -->
+<div style="display:none;">
+  <div id="box-dni" class="pink-box toggle-content">
+    <h2>⊗ Dni (do not interact) ⊗</h2>
+    <h3>If you don't know what any of these mean, it's unlikely you'll fall under one of these</h3>
+    <ul>
+      <li>pro-para / radqueer & adjascent</li>
+      <li>maps / no-maps / zoo's etc.</li>
+      <li>obvious but -> assholes, especially in fandom/shipping</li>
+      <li>proshippers •︵• sorry. heres your <a href="explaneeshin.html">explanation</a>
+        cuz people need one apparently</li>
+    </ul>  
+  </div>
+
+  <div id="box-fandoms" class="pink-box toggle-content">
+    <h2>♡ Fandoms ♡</h2>
+    <ul>
+      <li>TMNT</li>
+      <li>Undertale</li>
+      <li>Sonic the hedgehog</li>
+      <li>Alvin & the chipmunks</li>
+      <li>Disney</li>
+      <li>Sanrio</li>
+      <li>Super Mario</li>
+    </ul>      
+  </div>
+
+  <div id="box-socials" class="pink-box toggle-content">
+    <h2>♡ Socials ♡</h2>
+    <ul>
+      <li><a href="https://www.pillowfort.social/sweetiedollxoxo">Pillowfort</a></li>
+      <li><a href="https://www.tumblr.com/sweetiedollxoxo">Tumblr</a></li>
+      <li><a href="https://www.instagram.com/sweetiedollxoxo/">Instagram</a></li>
+      <li><a href="https://itaku.ee/profile/sweetiedollxoxo">Itaku</a></li>
+    </ul>      
+  </div>
+
+  <div id="box-cw" class="pink-box toggle-content">
+    <h2>♡ Content warnings ♡</h2>
+  </div>
+
+  <div id="box-char" class="pink-box toggle-content">
+    <h2>♡ Character profiles ♡</h2>
+  </div>
+
+  <div id="box-codes" class="pink-box toggle-content">
+    <h2>♡ Website codes ♡</h2>
+  </div>
+</div>
+</div>
+</div>
+
+    <script>
+const audio = document.getElementById("player-audio");
+const playPauseBtn = document.getElementById("playPauseBtn");
+const progressFill = document.getElementById("progressFill");
+const currentTimeText = document.getElementById("currentTime");
+const totalTimeText = document.getElementById("totalTime");
+
+const rewindBtn = document.getElementById("rewindBtn");
+const forwardBtn = document.getElementById("forwardBtn");
+const backBtn = document.getElementById("backBtn");
+const skipBtn = document.getElementById("skipBtn");
+
+/* Format seconds into mm:ss */
+function formatTime(sec) {
+  const m = Math.floor(sec / 60);
+  const s = Math.floor(sec % 60).toString().padStart(2, "0");
+  return `${m}:${s}`;
+}
+
+/* Update total time */
+audio.addEventListener("loadedmetadata", () => {
+  totalTimeText.textContent = formatTime(audio.duration);
+});
+
+/* Play / Pause */
+playPauseBtn.addEventListener("click", () => {
+  if (audio.paused) {
+    audio.play();
+    playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
+  } else {
+    audio.pause();
+    playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
+  }
+});
+
+/* Update progress bar */
+audio.addEventListener("timeupdate", () => {
+  const percentage = (audio.currentTime / audio.duration) * 100;
+  progressFill.style.width = percentage + "%";
+  currentTimeText.textContent = formatTime(audio.currentTime);
+});
+
+/* Rewind 5 seconds */
+rewindBtn.addEventListener("click", () => {
+  audio.currentTime = Math.max(0, audio.currentTime - 5);
+});
+
+/* Forward 5 seconds */
+forwardBtn.addEventListener("click", () => {
+  audio.currentTime = Math.min(audio.duration, audio.currentTime + 5);
+});
+
+/* Back to start */
+backBtn.addEventListener("click", () => {
+  audio.currentTime = 0;
+});
+
+/* Skip to end */
+skipBtn.addEventListener("click", () => {
+  audio.currentTime = audio.duration - 0.1;
+});
+
+
+
+// TOGGLE POP UP LOGIC
+
+const links = document.querySelectorAll('.toggle-box');
+
+// output box
+const outputBox = document.getElementById('toggle-output');
+const outputInner = document.getElementById('toggle-output-inner');
+
+// hidden boxes
+const boxes = document.querySelectorAll('.toggle-content');
+
+let activeBox = null;
+
+links.forEach(link => {
+  link.addEventListener('click', (e) => {
+    e.preventDefault();
+
+    const targetId = link.dataset.target;
+    const targetBox = document.getElementById(targetId);
+
+    // clicking the same link → hide output box
+    if (activeBox === targetBox) {
+      outputBox.style.display = 'none';
+      activeBox = null;
+      return;
+    }
+
+    // copy hidden box HTML into output box
+    outputInner.innerHTML = targetBox.innerHTML;
+
+    // show output box
+    outputBox.style.display = 'block';
+
+    activeBox = targetBox;
+
+    // scroll to output box
+    outputBox.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+});
+
+
+// ORIENTATION WARNING //
+
+// Detect if device is touch-based (phones/tablets)
+const isMobile = matchMedia("(hover: none) and (pointer: coarse)").matches;
+
+function checkOrientation() {
+  // If not mobile → NEVER show the overlay
+  if (!isMobile) return;
+
+  const warning = document.getElementById('orientation-warning');
+
+  if (window.innerWidth < window.innerHeight) {
+    // Portrait → show warning (mobile only)
+    warning.style.display = 'flex';
+  } else {
+    // Landscape → hide warning
+    warning.style.display = 'none';
+  }
+}
+
+// Run on load and on resize/orientation change
+window.addEventListener('load', checkOrientation);
+window.addEventListener('resize', checkOrientation);
+window.addEventListener('orientationchange', checkOrientation);
+
+</script>
+
+
+    <!-- Orientation warning overlay -->
+    <div id="orientation-warning" style="
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: #ffe6f0;
+    font-family: 'Fredoka', sans-serif;
+    text-align: center;
+    padding-top: 15vh; 
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 20px;
+  ">
+
+   <img src="https://file.garden/Z48EmHj5okOfzdFf/Images%20for%20site%20decor/warning-svgrepo-com.svg"
+   alt="warning svg image"
+   style="
+     width: 150px; 
+     height: 150px; 
+     image-rendering: pixelated;
+     filter: invert(82%) sepia(37%) saturate(986%) hue-rotate(290deg) brightness(103%) contrast(101%);
+   " />
+  
+    <span style="
+      color: #fe9fc5; 
+      font-size: 35px; 
+      font-weight: bold; 
+      line-height: 1.2;
+    ">
+  
+<p>(,,>﹏<,,)</p>
+♡ Please rotate your device to landscape. 
+My site's not super mobile friendly, sorry!
+
+</div>
+
+  </body>
+</html>
