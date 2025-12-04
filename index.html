@@ -405,7 +405,8 @@
   width: 100%;
 }
 
-      #age-overlay {
+    /* Overlay background */
+#age-overlay {
   position: fixed;
   inset: 0;
   background: rgba(0, 0, 0, 0.6);
@@ -415,16 +416,24 @@
   z-index: 9999;
 }
 
-#age-box {
-  background: white;
-  padding: 20px;
-  border-radius: 12px;
-  text-align: center;
-}
-
-/* When hidden, overlay is completely non-existent */
+/* When hidden, overlay disappears completely */
 #age-overlay.hidden {
   display: none !important;
+}
+
+/* Age box overrides for spacing */
+.age-pink-box {
+  width: 320px;
+  padding-top: 50px; /* compensates for bow */
+}
+
+/* Make date input match your soft cute aesthetic */
+#age-box input[type="date"] {
+  padding: 8px;
+  border-radius: 10px;
+  border: 1px solid #ff9ec9;
+  background-color: #fff0f6;
+  margin: 10px 0 15px;
 }
 
     </style>
@@ -432,16 +441,23 @@
 
   <body>
 
-    <div id="age-overlay">
-  <div id="age-box">
+   <div id="age-overlay">
+  <div id="age-box" class="pink-box age-pink-box">
+    <img
+      src="https://cdn.imgchest.com/files/34000b252df3.png"
+      class="bow-sticker"
+      alt="Bow sticker"
+    />
+
     <h2>Age Verification</h2>
     <p>Please enter your birthdate:</p>
 
     <input type="date" id="birthdate" />
 
-    <button id="verify-btn">Verify</button>
+    <button id="verify-btn" class="btn-pink">Verify</button>
   </div>
 </div>
+
 
     <div class="container">
       <header>
@@ -777,7 +793,8 @@ function checkOrientation() {
   }
 }
 
-       function setCookie(name, value, days) {
+      // AGE VERIFICATION OVERLAY
+  function setCookie(name, value, days) {
     const d = new Date();
     d.setTime(d.getTime() + (days*24*60*60*1000));
     document.cookie = `${name}=${value};expires=${d.toUTCString()};path=/`;
@@ -803,7 +820,7 @@ function checkOrientation() {
     }
   });
 
-  // Age verification logic
+  // Verification logic
   document.getElementById("verify-btn").addEventListener("click", () => {
     const birthdate = document.getElementById("birthdate").value;
 
@@ -818,12 +835,13 @@ function checkOrientation() {
     const age = Math.abs(ageDate.getUTCFullYear() - 1970);
 
     if (age >= 18) {
-      setCookie("ageVerified", "yes", 365); // 1 year validity
+      setCookie("ageVerified", "yes", 365); // 1 year
       hideOverlay();
     } else {
       alert("You must be 18+ to enter.");
     }
   });
+ 
 
 // Run on load and on resize/orientation change
 window.addEventListener('load', checkOrientation);
