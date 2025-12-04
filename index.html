@@ -404,10 +404,44 @@
 #home-content {
   width: 100%;
 }
+
+      #age-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+#age-box {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  text-align: center;
+}
+
+/* When hidden, overlay is completely non-existent */
+#age-overlay.hidden {
+  display: none !important;
+}
+
     </style>
   </head>
 
   <body>
+
+    <div id="age-overlay">
+  <div id="age-box">
+    <h2>Age Verification</h2>
+    <p>Please enter your birthdate:</p>
+
+    <input type="date" id="birthdate" />
+
+    <button id="verify-btn">Verify</button>
+  </div>
+</div>
 
     <div class="container">
       <header>
@@ -742,6 +776,54 @@ function checkOrientation() {
     warning.style.display = 'none';
   }
 }
+
+       function setCookie(name, value, days) {
+    const d = new Date();
+    d.setTime(d.getTime() + (days*24*60*60*1000));
+    document.cookie = `${name}=${value};expires=${d.toUTCString()};path=/`;
+  }
+
+  function getCookie(name) {
+    const cookies = document.cookie.split("; ");
+    for (const cookie of cookies) {
+      const [key, val] = cookie.split("=");
+      if (key === name) return val;
+    }
+    return null;
+  }
+
+  function hideOverlay() {
+    document.getElementById("age-overlay")?.classList.add("hidden");
+  }
+
+  // On page load: if cookie exists, hide overlay
+  window.addEventListener("load", () => {
+    if (getCookie("ageVerified") === "yes") {
+      hideOverlay();
+    }
+  });
+
+  // Age verification logic
+  document.getElementById("verify-btn").addEventListener("click", () => {
+    const birthdate = document.getElementById("birthdate").value;
+
+    if (!birthdate) {
+      alert("Please enter your birthdate.");
+      return;
+    }
+
+    const dob = new Date(birthdate);
+    const ageDifMs = Date.now() - dob.getTime();
+    const ageDate = new Date(ageDifMs);
+    const age = Math.abs(ageDate.getUTCFullYear() - 1970);
+
+    if (age >= 18) {
+      setCookie("ageVerified", "yes", 365); // 1 year validity
+      hideOverlay();
+    } else {
+      alert("You must be 18+ to enter.");
+    }
+  });
 
 // Run on load and on resize/orientation change
 window.addEventListener('load', checkOrientation);
