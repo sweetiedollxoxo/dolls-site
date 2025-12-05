@@ -380,7 +380,58 @@
   align-items: center;
   pointer-events: none;
 }
+.chat-bubble-wrapper {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
 
+/* Icon */
+.chat-icon {
+  width: 56px;
+  height: 56px;
+  object-fit: contain;
+}
+
+/* Bubble */
+.speech-bubble {
+  position: relative;
+  background: #FFF1F7;           /* bubble color */
+  border: 4px solid #ffb6cf;     /* bubble border */
+  border-radius: 30px;            /* rounded corners */
+  padding: 18px 24px;
+  max-width: 90%;
+}
+
+/* Tail border (outer) */
+.speech-bubble:before {
+  content: '';
+  position: absolute;
+  left: -17px;       /* moves it outside the bubble */
+  top: 18px;         /* near top */
+  width: 0;
+  height: 0;
+  border: 16px solid transparent; /* outer size */
+  border-right-color: #ffb6cf;    /* border color matches bubble border */
+  border-left: 0;
+  margin-top: 0;      /* no centering needed */
+  z-index: 0;         /* behind bubble */
+}
+
+/* Tail inner (bubble color) */
+.speech-bubble:after {
+  content: '';
+  position: absolute;
+  left: -12px;       /* slightly inside the border */
+  top: 22px;         /* near top, adjust for inner triangle */
+  width: 0;
+  height: 0;
+  border: 12px solid transparent;  
+  border-right-color: #FFF1F7;    /* bubble background */
+  border-left: 0;
+  margin-top: 0;     /* no centering */
+  z-index: 1;        /* above border */
+}
 
 
     </style>
