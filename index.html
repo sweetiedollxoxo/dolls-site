@@ -461,24 +461,6 @@
 
   <body>
 
-   <div id="age-overlay">
-  <div id="age-box" class="pink-box age-pink-box">
-    <img
-      src="https://cdn.imgchest.com/files/34000b252df3.png"
-      class="bow-sticker"
-      alt="Bow sticker"
-    />
-
-    <h2>Age Verification</h2>
-    <p>Please enter your birthdate:</p>
-
-    <input type="date" id="birthdate" />
-
-    <button id="verify-btn" class="btn-pink">Verify</button>
-  </div>
-</div>
-
-
     <div class="container">
       <header>
         <img
@@ -794,76 +776,6 @@ links.forEach(link => {
     outputBox.scrollIntoView({ behavior: 'smooth', block: 'start' });
   });
 });
-
-
-// ORIENTATION WARNING //
-
-// Detect if device is touch-based (phones/tablets)
-const isMobile = matchMedia("(hover: none) and (pointer: coarse)").matches;
-
-function checkOrientation() {
-  // If not mobile → NEVER show the overlay
-  if (!isMobile) return;
-
-  const warning = document.getElementById('orientation-warning');
-
-  if (window.innerWidth < window.innerHeight) {
-    // Portrait → show warning (mobile only)
-    warning.style.display = 'flex';
-  } else {
-    // Landscape → hide warning
-    warning.style.display = 'none';
-  }
-}
-
-      // AGE VERIFICATION OVERLAY
-  function setCookie(name, value, days) {
-    const d = new Date();
-    d.setTime(d.getTime() + (days*24*60*60*1000));
-    document.cookie = `${name}=${value};expires=${d.toUTCString()};path=/`;
-  }
-
-  function getCookie(name) {
-    const cookies = document.cookie.split("; ");
-    for (const cookie of cookies) {
-      const [key, val] = cookie.split("=");
-      if (key === name) return val;
-    }
-    return null;
-  }
-
-  function hideOverlay() {
-    document.getElementById("age-overlay")?.classList.add("hidden");
-  }
-
-  // On page load: if cookie exists, hide overlay
-  window.addEventListener("load", () => {
-    if (getCookie("ageVerified") === "yes") {
-      hideOverlay();
-    }
-  });
-
-  // Verification logic
-  document.getElementById("verify-btn").addEventListener("click", () => {
-    const birthdate = document.getElementById("birthdate").value;
-
-    if (!birthdate) {
-      alert("Please enter your birthdate.");
-      return;
-    }
-
-    const dob = new Date(birthdate);
-    const ageDifMs = Date.now() - dob.getTime();
-    const ageDate = new Date(ageDifMs);
-    const age = Math.abs(ageDate.getUTCFullYear() - 1970);
-
-    if (age >= 18) {
-      setCookie("ageVerified", "yes", 365); // 1 year
-      hideOverlay();
-    } else {
-      alert("You must be 18+ to enter.");
-    }
-  });
 
 </script>
   </body>
