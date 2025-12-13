@@ -232,6 +232,130 @@
     display: none !important;
   }
 }
+/* 🌙 Toggle button */
+.dark-toggle {
+ background: #ffe6f0;
+ border: 6px solid var(--white);
+ box-shadow: 0 0 0 8px var(--pink); /* MATCHES pink boxes */
+ color: #fe9fc5;
+ padding: 8px 14px;
+ border-radius: 30px;
+ font-size: 14px;
+ font-weight: 700;
+ cursor: pointer;
+ margin-top: -10px;   /* move it upward */
+ margin-bottom: 15px; /* add space below so nav doesn't touch it */
+ transition: 0.2s ease;
+ font-family: "Fredoka", sans-serif;
+}
+
+
+.dark-toggle:hover {
+ transform: scale(1.05);
+}
+
+
+/* 🌙 DARK MODE THEME */
+body.dark {
+ --pink: #7a4a60;
+ --white: #1e1e1e;
+ --polka-bg-color: #1a1a1a;
+ --polka-bg-image: radial-gradient(#2a2a2a 28.4%, transparent 28.4%),
+                   radial-gradient(#2a2a2a 28.4%, transparent 28.4%);
+ background-color: var(--polka-bg-color);
+ color: #ffd1e8;
+}
+
+
+/* Override pink boxes */
+.dark .pink-box {
+ background-color: #2a1f27;
+ border-color: #3b2a33;
+ box-shadow: 0 0 0 10px #553547;
+}
+
+
+/* White inner box */
+.dark .white-inner-box {
+ background: #2b2b2b;
+ color: #ffd1e8;
+}
+
+
+/* About scroll */
+.dark .about-scroll {
+ background: #2a1f27;
+ border-color: #553547;
+ color: #ffd1e8;
+}
+
+
+.dark .about-scroll::-webkit-scrollbar-thumb {
+ background: #553547;
+}
+
+
+.dark .about-scroll::-webkit-scrollbar-track {
+ background: #2a1f27;
+}
+
+
+/* Player */
+.dark .cute-player {
+ background: #2a1f27;
+ border-color: #553547;
+}
+
+
+.dark .cp-btn {
+ background: #3b2a33;
+ color: #ffd1e8;
+}
+
+
+.dark .cp-btn.play {
+ background: #2a1f27;
+}
+
+
+/* Links */
+.dark a {
+ color: #ff9ec9;
+}
+
+
+.dark a::after {
+ background-color: #ff9ec9;
+}
+
+
+/* 🌙 Dark mode toggle button in dark mode */
+body.dark .dark-toggle {
+ background: #2a1f27;
+ border-color: #553547;
+ color: #ff9ec9;
+ box-shadow: 0 0 0 6px #3b2a33;
+}
+
+
+/* 🌙 Navbar in dark mode */
+body.dark nav {
+ background-color: #2a1f27;
+ border-color: #3b2a33;
+ box-shadow: 0 0 0 10px #553547;
+}
+
+
+/* Navbar text */
+body.dark nav a {
+ color: #ff9ec9;
+}
+
+
+/* Navbar link underline hover */
+body.dark nav a::after {
+ background-color: #ff9ec9;
+}
 
     </style>
   </head>
@@ -245,6 +369,8 @@
           class="logo"
         />
       </header>
+
+      <button id="dark-mode-toggle" class="dark-toggle">🌙 Dark Mode</button>
 
       <div class="content-wrapper">
         <nav>
@@ -290,27 +416,37 @@
           
             </div>
           </div>
+
           <script>
-// ORIENTATION WARNING //
+            // Dark mode logic
+ const toggle = document.getElementById("dark-mode-toggle");
 
-// Detect if device is touch-based (phones/tablets)
-const isMobile = matchMedia("(hover: none) and (pointer: coarse)").matches;
+ // Load user preference
+ if (localStorage.getItem("darkMode") === "enabled") {
+ document.body.classList.add("dark");
+ }
+ 
+ 
+ toggle.addEventListener("click", () => {
+ document.body.classList.toggle("dark");
+ 
+ // Store preference
+ if (document.body.classList.contains("dark")) {
+   localStorage.setItem("darkMode", "enabled");
+   toggle.textContent = "☀️ Light Mode";
+ } else {
+   localStorage.setItem("darkMode", "disabled");
+   toggle.textContent = "🌙 Dark Mode";
+ }
+ });
+ 
+ 
+ // Update button text on page load
+ toggle.textContent =
+ document.body.classList.contains("dark")
+   ? "☀️ Light Mode"
+   : "🌙 Dark Mode";
+          </script> 
 
-function checkOrientation() {
-  // If not mobile → NEVER show the overlay
-  if (!isMobile) return;
-
-  const warning = document.getElementById('orientation-warning');
-
-  if (window.innerWidth < window.innerHeight) {
-    // Portrait → show warning (mobile only)
-    warning.style.display = 'flex';
-  } else {
-    // Landscape → hide warning
-    warning.style.display = 'none';
-  }
-}
-
-</script>           
   </body>
 </html>
