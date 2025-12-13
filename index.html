@@ -406,61 +406,119 @@
   width: 100%;
 }
 
-    /* Overlay background */
-#age-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.6);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 9999;
-}
-
-/* When hidden, overlay disappears completely */
-#age-overlay.hidden {
-  display: none !important;
-}
-
-/* Age box overrides for spacing */
-.age-pink-box {
-  width: 320px;
-  padding-top: 50px; /* compensates for bow */
-}
-
-/* Make date input match your soft cute aesthetic */
-#age-box input[type="date"] {
-  padding: 8px;
-  border-radius: 10px;
-  border: 1px solid #ff9ec9;
-  background-color: #fff0f6;
-  margin: 10px auto;
-}
-#verify-btn.btn-pink {
-  background-color: #ffb7d5;     /* same as pink outline */
-  border: 2px solid #ff8ebc;     /* slightly darker outline, like your boxes */
-  color: #ffffff;
-  margin: 15px auto 0;   /* puts it directly under the date input */
-  padding: 10px 20px;
-  font-size: 1.1rem;
-  font-weight: 600;
-  border-radius: 20px;
+/* 🌙 Toggle button */
+.dark-toggle {
+  background: #ffe6f0;
+  border: 6px solid var(--white);
+  box-shadow: 0 0 0 8px var(--pink); /* MATCHES pink boxes */
+  color: #fe9fc5;
+  padding: 8px 14px;
+  border-radius: 30px;
+  font-size: 14px;
+  font-weight: 700;
   cursor: pointer;
+  margin-top: -10px;   /* move it upward */
+  margin-bottom: 15px; /* add space below so nav doesn't touch it */
   transition: 0.2s ease;
   font-family: "Fredoka", sans-serif;
 }
 
-#verify-btn.btn-pink:hover {
-  background-color: #ff8ebc;    /* soft darker pink hover */
-  border-color: #ff6fa6;
+.dark-toggle:hover {
+  transform: scale(1.05);
+}
+
+/* 🌙 DARK MODE THEME */
+body.dark {
+  --pink: #7a4a60;
+  --white: #1e1e1e;
+  --polka-bg-color: #1a1a1a;
+  --polka-bg-image: radial-gradient(#2a2a2a 28.4%, transparent 28.4%),
+                    radial-gradient(#2a2a2a 28.4%, transparent 28.4%);
+  background-color: var(--polka-bg-color);
+  color: #ffd1e8;
+}
+
+/* Override pink boxes */
+.dark .pink-box {
+  background-color: #2a1f27;
+  border-color: #3b2a33;
+  box-shadow: 0 0 0 10px #553547;
+}
+
+/* White inner box */
+.dark .white-inner-box {
+  background: #2b2b2b;
+  color: #ffd1e8;
+}
+
+/* About scroll */
+.dark .about-scroll {
+  background: #2a1f27;
+  border-color: #553547;
+  color: #ffd1e8;
+}
+
+.dark .about-scroll::-webkit-scrollbar-thumb {
+  background: #553547;
+}
+
+.dark .about-scroll::-webkit-scrollbar-track {
+  background: #2a1f27;
+}
+
+/* Player */
+.dark .cute-player {
+  background: #2a1f27;
+  border-color: #553547;
+}
+
+.dark .cp-btn {
+  background: #3b2a33;
+  color: #ffd1e8;
+}
+
+.dark .cp-btn.play {
+  background: #2a1f27;
+}
+
+/* Links */
+.dark a {
+  color: #ff9ec9;
+}
+
+.dark a::after {
+  background-color: #ff9ec9;
+}
+
+/* 🌙 Dark mode toggle button in dark mode */
+body.dark .dark-toggle {
+  background: #2a1f27;
+  border-color: #553547;
+  color: #ff9ec9;
+  box-shadow: 0 0 0 6px #3b2a33;
+}
+
+/* 🌙 Navbar in dark mode */
+body.dark nav {
+  background-color: #2a1f27;
+  border-color: #3b2a33;
+  box-shadow: 0 0 0 10px #553547;
+}
+
+/* Navbar text */
+body.dark nav a {
+  color: #ff9ec9;
+}
+
+/* Navbar link underline hover */
+body.dark nav a::after {
+  background-color: #ff9ec9;
 }
 
 
     </style>
   </head>
-
-  <body>
-
+    
     <div class="container">
       <header>
         <img
@@ -470,13 +528,15 @@
         />
       </header>
 
+      <button id="dark-mode-toggle" class="dark-toggle">🌙 Dark Mode</button>
+
       <div class="content-wrapper">
       <nav>
         <a href="index.html">Home</a>
         <a href="shop.html">Shop</a>
         <a href="posts.html">Posts</a>
         <a href="comics.html">Comics</a>
-        <a href="galleries.html">Galleries</a>
+        <a href="galleries.html">Galleries</a>       
       </nav>
 
       <!-- This is where link content will appear -->
@@ -561,16 +621,19 @@
             <h3>Looks a little squished on mobile, sorry!</h3>
             <p style="text-align: left; padding: 0 10px"><b>Hello!</b> call me Doll 🩷 I'm an artist and writer who loves drawing cute things and writing romance stories. 
               Most of my stuff is very nsfw and a bit taboo, but don't worry! content warnings will always be provided on my more
-              freaky content. I'm very into writing/drawing fandom related content, oc x canon, and my own original stuff. Feel 
+              freaky content. I'm very into writing/drawing fandom related stuff, oc x canon, and my own original work. Feel 
               free to ask me any questions about my work, or even send me fanart if you like!
             </p>
-             
-           <p>● ❌ AI is not : a human replacement</p>
-           <p>● ✅ AI can be : an accessibility + creative tool (renewable energy powered)</p>
+            <ul style="padding: 0 10px; margin: 0; text-align: left;">
+            <li>❌ AI is not : a human replacement</i>
+            <li>✅ AI can be : an accessibility + creative tool (renewable energy powered)</li>
+
             
-            <p style="text-align: left; padding: 0 10px">No dni, no point in having one, I can't stop anyone from interacting, just be aware of the content warnings</p>
             <p style="text-align: left; padding: 0 10px"><b>NOTE :</b> all my work involves <b>fictional characters</b> in <b>fictional</b> scenarios,
               I do <b>not</b> support pro-para/radqueer/pedophiles/zoophiles/maps etc. or condone real life harm</p>
+            
+            <p style="text-align: left; padding: 0 10px"><b>Not a proshipper or an anti, I'd rather draw my freaky shit without either communities drama</b></p>
+
           </div>
         </div>
         <!-- Cute bordered links under the iPod + About section -->
@@ -598,7 +661,7 @@
     <img
       id="default-gif"
       src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExajN4ZnhmMHd6NWU5YmI0Z2NkbjJiNzJkOGFjaHRxbXF0Mmhpdmc0ayZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/3LWy5senb4QFCIqgYd/giphy.gif"
-      style="width: 180px; height: auto; display: block;"
+      style="width: 180px; height: auto; display: block; margin-top: -30px;"
     />
   </div>
 </div>
@@ -767,6 +830,33 @@ links.forEach(link => {
     outputBox.scrollIntoView({ behavior: 'smooth', block: 'start' });
   });
 });
+
+// Dark mode logic
+  const toggle = document.getElementById("dark-mode-toggle");
+
+  // Load user preference
+  if (localStorage.getItem("darkMode") === "enabled") {
+    document.body.classList.add("dark");
+  }
+
+  toggle.addEventListener("click", () => {
+    document.body.classList.toggle("dark");
+
+    // Store preference
+    if (document.body.classList.contains("dark")) {
+      localStorage.setItem("darkMode", "enabled");
+      toggle.textContent = "☀️ Light Mode";
+    } else {
+      localStorage.setItem("darkMode", "disabled");
+      toggle.textContent = "🌙 Dark Mode";
+    }
+  });
+
+  // Update button text on page load
+  toggle.textContent =
+    document.body.classList.contains("dark")
+      ? "☀️ Light Mode"
+      : "🌙 Dark Mode";
 
 </script>
   </body>
