@@ -730,6 +730,77 @@ body.dark .speech-bubble:after {
   border-right-color: #3b2a33; /* matches dark bubble */
 }
 
+.tag-pill {
+  background-color: #ffe6f0;
+  border: 2px solid #fe9fc5;
+  border-radius: 20px;
+  padding: 4px 10px;
+  font-size: 14px;
+  color: #fe9fc5;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.tag-pill:hover {
+  background-color: #fe9fc5;
+  color: #ffffff;
+}
+
+/* Dark mode for tag filter */
+body.dark .tag-filter-container input#tag-filter-input {
+  background-color: #2b2b2b; /* dark input background */
+  border-color: #553547;     /* dark border */
+  color: #ffd1e8;            /* text color */
+}
+
+body.dark .tag-filter-container input#tag-filter-input::placeholder {
+  color: #ffb6e2;             /* placeholder color */
+  opacity: 0.6;
+}
+
+/* Dark mode for tag filter */
+body.dark .tag-filter-container button#add-tag-btn {
+  background-color: #3b2a33;  /* dark button background */
+  border-color: #553547;      /* dark border */
+  color: #ffd1e8;             /* text color */
+}
+
+body.dark .tag-filter-container label {
+  color: #ffd1e8;             /* label text color */
+}
+
+/* Add Tag Button - Light Mode */
+.tag-filter-container button#add-tag-btn {
+  padding: 8px 14px;
+  border-radius: 20px;
+  border: 3px solid #fe9fc5;
+  background-color: #ffe6f0; /* light pink */
+  color: #fe9fc5;            /* pink text */
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+/* Hover effect for light mode */
+.tag-filter-container button#add-tag-btn:hover {
+  background-color: #fe9fc5; /* darker pink on hover */
+  color: #ffffff;             /* white text */
+}
+
+/* Add Tag Button - Dark Mode */
+body.dark .tag-filter-container button#add-tag-btn {
+  background-color: #3b2a33;  /* dark purple/brown */
+  border-color: #553547;      /* darker border */
+  color: #ffd1e8;             /* pink text */
+}
+
+/* Hover effect for dark mode */
+body.dark .tag-filter-container button#add-tag-btn:hover {
+  background-color: #553547;  /* slightly lighter dark on hover */
+  color: #ffffff;             /* white text */
+}
+
+
     </style>
   </head>
 
@@ -783,10 +854,26 @@ body.dark .speech-bubble:after {
               <i class="fa-solid fa-arrow-left"></i>
             </span>
           </div>
-        </div>
+
+        <!-- Tag filter -->
+<!-- Tag filter inside same container -->
+<div class="tag-filter-container" style="margin-top: 10px; text-align: left; padding: 0 20px;">
+  <label for="tag-filter-input" style="font-weight: 700; color: #fe9fc5;">Filter tags ♡ — saved in browser; add again if you change browsers or clear cache.</label>
+  <div style="display: flex; gap: 5px; margin-top: 5px;">
+    <input
+      type="text"
+      id="tag-filter-input"
+      placeholder="Type a tag, e.g. #nsfw"
+      style="flex: 1; padding: 8px 12px; border-radius: 20px; border: 3px solid #fe9fc5; font-family: 'Fredoka', sans-serif;"
+    />
+    <button id="add-tag-btn">Add</button>
+  </div>
+  <div id="filtered-tags-list" style="margin-top: 5px; display: flex; flex-wrap: wrap; gap: 5px;"></div>
+</div>
+</div>
 
         <!-- First post -->
-        <div class="pink-box">
+        <div class="pink-box" id="post-1">
           <img
             src="https://cdn.imgchest.com/files/34000b252df3.png"
             class="bow-sticker"
@@ -805,6 +892,7 @@ body.dark .speech-bubble:after {
 
           <p style="text-align: left; padding: 0 20px"><b>WELCOME</b> to your new posts page!</p>
           <p style="text-align: left; padding: 0 20px"><b>tags : #example #example #example</b></p>
+
 
           <div class="divider-wrapper">
             <div class="my-divider"></div>
@@ -915,7 +1003,9 @@ body.dark .speech-bubble:after {
  </div>
 </div>
 
- <p style="text-align: left; padding: 0 20px">Press bar below to reveal censored text</p>
+ <p style="text-align: left; padding: 0 20px">Press bar below to reveal censored text, oh Lookie here, 
+  <a href="#post-1">a link ♡</a></p>
+
    <!-- CENSORED TEXT -->
    <p style="padding: 0 20px; text-align: left;">
      <span class="censored-text" onclick="this.classList.add('revealed')">
@@ -1078,6 +1168,56 @@ document.querySelectorAll('.censored-text').forEach(span => {
     span.classList.add('revealed');
   });
 });
+
+// TAG FILTER LOGIC
+const tagInput = document.getElementById('tag-filter-input');
+const addTagBtn = document.getElementById('add-tag-btn');
+const filteredTagsList = document.getElementById('filtered-tags-list');
+
+// Load saved tags from localStorage
+let filteredTags = JSON.parse(localStorage.getItem('filteredTags') || '[]');
+
+// Function to render tag pills
+function renderFilteredTags() {
+  filteredTagsList.innerHTML = '';
+  filteredTags.forEach(tag => {
+    const span = document.createElement('span');
+    span.className = 'tag-pill';
+    span.textContent = tag;
+    // Remove tag on click
+    span.addEventListener('click', () => {
+      filteredTags = filteredTags.filter(t => t !== tag);
+      localStorage.setItem('filteredTags', JSON.stringify(filteredTags));
+      renderFilteredTags();
+      applyTagFilter();
+    });
+    filteredTagsList.appendChild(span);
+  });
+}
+
+// Function to apply filter to posts
+function applyTagFilter() {
+  posts.forEach(post => {
+    const postTagsText = post.querySelector('p b')?.textContent.toLowerCase() || '';
+    post.style.display = filteredTags.some(tag => postTagsText.includes(tag.toLowerCase())) ? 'none' : '';
+  });
+}
+
+// Add tag on button click
+addTagBtn.addEventListener('click', () => {
+  const tag = tagInput.value.trim();
+  if (tag && !filteredTags.includes(tag)) {
+    filteredTags.push(tag);
+    localStorage.setItem('filteredTags', JSON.stringify(filteredTags));
+    tagInput.value = '';
+    renderFilteredTags();
+    applyTagFilter();
+  }
+});
+
+// Initialize on page load
+renderFilteredTags();
+applyTagFilter();
 
     </script>
   </body>
